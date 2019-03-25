@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Push Notification Demo</title>
+  <link rel="icon" href="/img/icon.png">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+  <div style="background:transparent !important" class="jumbotron text-center">
+    <h1>Push Notification Demo</h1>
+  </div>
+  <div class="container-fluid">
+    <div class="row justify-content-md-center">
+      <button type="button" id="notificacao" class="btn btn-primary" onclick="requestPermission();">Habilitar Notificações</button>
+    </div>
+    <div class="row justify-content-md-center mt-3">
+      <div class="col col-lg-4">
+        <label for="token" class="form-group">Token:</label>
+        <input type="text" id="token" class="form-control" placeholder="token de acesso" disabled>
+      </div>
+    </div>
+    <div class="row justify-content-md-center mt-5">
+      <div class="col col-lg-4">
+        <h2>Envio de Mensagens</h2>
+        <p class="font-italic">*Simula o envio de notificações mas o ideal é vir do seu backend</p>
+        <form id="notification">
+          <div class="form-group">
+            <label for="title" class="form-group">Título:</label>
+            <input type="text" id="title" class="form-control" placeholder="título da mensagem">
+          </div>
+          <div class="form-group">
+            <label for="message" class="form-group">Mensagem:</label>
+            <textarea id="message" rows="8" cols="80" class="form-control" placeholder="corpo da mensagem"></textarea>
+          </div>
+          <button id="send" type="submit" class="btn btn-primary">Enviar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+  <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="https://www.gstatic.com/firebasejs/5.7.1/firebase-app.js"></script>
+  <script type="text/javascript" src="https://www.gstatic.com/firebasejs/5.7.1/firebase-messaging.js"></script>
+  <script type="text/javascript" src="/src/init.js"></script>
+  <script type="text/javascript" src="/src/notification.js"></script>
+  <script type="text/javascript">
+    document.addEventListener("DOMContentLoaded", function() {
+      if (!("Notification" in window)) {
+        alert("Este navegador não suporta notificações de Desktop!");
+      }
+
+      $("#notification").submit(function(event) {
+        sendMessage();
+        event.preventDefault();
+      });
+    });
+  </script>
+</body>
+</html>
